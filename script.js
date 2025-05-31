@@ -45,27 +45,58 @@ function actualizarInfoCacion() {
     cancion.addEventListener('loadeddata', function(){});
 };
 
+cancion.addEventListener('loadedmetadata', function() {
+    progreso.max = cancion.duration;
+    progreso.value = cancion.currentTime;
+})
+
 botonReproducirPausar.addEventListener('click',reproducirPausar);
 
 function reproducirPausar() {
     if (cancion.paused) {
       reproducirCancion();
-      iconoControl.classList.add('bi-pause-fill');
-      iconoControl.classList.remove('bi-play-fill');
     } else {
        pausarCancion();
-      iconoControl.classList.remove('bi-pause-fill');
-      iconoControl.classList.add('bi-play-fill');
     }
 };
 
 function reproducirCancion(){
-    cancion.play()
+    cancion.play();
+     iconoControl.classList.add('bi-pause-fill');
+     iconoControl.classList.remove('bi-play-fill');
 };
 
 function pausarCancion(){
     cancion.pause();
+    iconoControl.classList.remove('bi-pause-fill');
+      iconoControl.classList.add('bi-play-fill');
 };
+
+cancion.addEventListener('timeupdate', function() {
+    if(!cancion.paused) {
+        progreso.value = cancion.currentTime;
+    }
+});
+
+progreso.addEventListener('input', function() {
+    cancion.currentTime = progreso.value;
+});
+
+//progreso.addEventListener('change', ()=> {
+  //  reproducirCancion();
+//});
+
+botonAdelante.addEventListener('click', function() {
+    indiceCancionActual = (indiceCancionActual + 1) % canciones.length;
+    actualizarInfoCacion();
+    reproducirCancion();
+});
+
+botonAtras.addEventListener('click', function() {
+    indiceCancionActual = (indiceCancionActual - 1 + canciones.length) % canciones.length;
+    actualizarInfoCacion();
+    reproducirCancion();
+});
 
 
 actualizarInfoCacion();
