@@ -20,7 +20,7 @@ body {
     align-items: center;
     width: 100%;
 
-    background: url(img/BackGround.jpg) ;
+    background: url(img/fondo.jpeg) ;
     background-repeat: no-repeat;
     background-size: cover;
     backdrop-filter: blur(8px);

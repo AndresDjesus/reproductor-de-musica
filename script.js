@@ -1,5 +1,3 @@
-const { application } = require("express");
-
 const tituloCancion = document.querySelector('.reproductor-musica h1');  
 const nombreArtista = document.querySelector('.reproductor-musica p');
 const progreso = document.getElementById('progreso');
@@ -11,7 +9,7 @@ const botonReproducirPausar = document.querySelector('.controles button.boton-re
 
 const canciones = [
     {
-        titulo: 'A Year Ago ',
+        titulo: 'A Year Ago',
         nombre: 'NEFFEX',
         fuente: 'music/A Year Ago - NEFFEX.mp3'
     },
@@ -51,11 +49,23 @@ botonReproducirPausar.addEventListener('click',reproducirPausar);
 
 function reproducirPausar() {
     if (cancion.paused) {
-      
+      reproducirCancion();
+      iconoControl.classList.add('bi-pause-fill');
+      iconoControl.classList.remove('bi-play-fill');
     } else {
-       
+       pausarCancion();
+      iconoControl.classList.remove('bi-pause-fill');
+      iconoControl.classList.add('bi-play-fill');
     }
-}
+};
+
+function reproducirCancion(){
+    cancion.play()
+};
+
+function pausarCancion(){
+    cancion.pause();
+};
 
 
 actualizarInfoCacion();
