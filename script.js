@@ -1,3 +1,5 @@
+const { application } = require("express");
+
 const tituloCancion = document.querySelector('.reproductor-musica h1');  
 const nombreArtista = document.querySelector('.reproductor-musica p');
 const progreso = document.getElementById('progreso');
@@ -35,3 +37,25 @@ const canciones = [
     },
 
 ];
+
+let indiceCancionActual = 0;
+
+function actualizarInfoCacion() {
+    tituloCancion.textContent = canciones[indiceCancionActual].titulo;
+    nombreArtista.textContent = canciones[indiceCancionActual].nombre;
+    cancion.src = canciones[indiceCancionActual].fuente;
+    cancion.addEventListener('loadeddata', function(){});
+};
+
+botonReproducirPausar.addEventListener('click',reproducirPausar);
+
+function reproducirPausar() {
+    if (cancion.paused) {
+      
+    } else {
+       
+    }
+}
+
+
+actualizarInfoCacion();
